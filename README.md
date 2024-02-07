@@ -52,3 +52,9 @@ See the [Sage installation documentation](https://roots.io/sage/docs/installatio
 - Follow [@rootswp on Twitter](https://twitter.com/rootswp)
 - Read the [Roots Blog](https://roots.io/blog/)
 - Subscribe to the [Roots Newsletter](https://roots.io/newsletter/)
+
+## This is a fork of the original Sage theme to be used as a starter theme for CodeZone.
+
+- git fetch upstream
+- git checkout main
+- git merge upstream/main
