@@ -1,10 +1,11 @@
 import domReady from '@roots/sage/client/dom-ready';
+import initBlocks from "@scripts/blocks.js";
 
 /**
  * Application entrypoint
  */
 domReady(async () => {
-  // ...
+    initBlocks();
 });
 
 /**

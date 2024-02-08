@@ -1,0 +1,21 @@
+{
+  "name": "cz/show-hide",
+  "title": "Show / Hide",
+  "description": "Show or hide a section based on screen size.",
+  "category": "formatting",
+  "icon": "hidden",
+  "keywords": [
+    "show",
+    "hide",
+    "screen",
+    "media",
+    "responsive"
+  ],
+  "supports": {
+    "jsx": true
+  },
+  "acf": {
+    "mode": "preview",
+    "renderCallback": "cz_render_block"
+  }
+}
