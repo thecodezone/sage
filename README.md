@@ -55,6 +55,20 @@ See the [Sage installation documentation](https://roots.io/sage/docs/installatio
 
 ## This is a fork of the original Sage theme to be used as a starter theme for CodeZone.
 
+To update fork:
+
 - git fetch upstream
 - git checkout main
 - git merge upstream/main
+
+To start a new project off this theme:
+
+ - git clone https://github.com/thecodezone/sage.git my-custom-site
+ - cd my-custom-site
+ - rm -rf .git
+ - git init
+ - git add .
+ - git commit -m "Initial commit with customized Roots Sage theme"
+ - git remote add origin https://github.com/thecodezone/my-custom-site.git
+ - git push -u origin main
+

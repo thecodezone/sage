@@ -1,9 +1,5 @@
-/**
- * @see {@link https://bud.js.org/extensions/bud-preset-wordpress/editor-integration/filters}
- */
-roots.register.filters('@scripts/filters');
+import initBlocks from "@scripts/blocks.js";
 
-/**
- * @see {@link https://webpack.js.org/api/hot-module-replacement/}
- */
-if (import.meta.webpackHot) import.meta.webpackHot.accept(console.error);
+window._wpLoadBlockEditor.then( function() {
+    initBlocks();
+});

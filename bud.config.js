@@ -1,80 +1,67 @@
+import {bud} from '@roots/bud'
+
+
 /**
- * Compiler configuration
+ * Development server settings
  *
- * @see {@link https://roots.io/sage/docs sage documentation}
- * @see {@link https://bud.js.org/learn/config bud.js configuration guide}
- *
- * @type {import('@roots/bud').Config}
+ * @see {@link https://bud.js.org/docs/bud.setUrl}
+ * @see {@link https://bud.js.org/docs/bud.setProxyUrl}
+ * @see {@link https://bud.js.org/docs/bud.watch}
  */
-export default async (app) => {
-  /**
-   * Application assets & entrypoints
-   *
-   * @see {@link https://bud.js.org/reference/bud.entry}
-   * @see {@link https://bud.js.org/reference/bud.assets}
-   */
-  app
-    .entry('app', ['@scripts/app', '@styles/app'])
-    .entry('editor', ['@scripts/editor', '@styles/editor'])
-    .assets(['images']);
-
-  /**
-   * Set public path
-   *
-   * @see {@link https://bud.js.org/reference/bud.setPublicPath}
-   */
-  app.setPublicPath('/app/themes/sage/public/');
-
-  /**
-   * Development server settings
-   *
-   * @see {@link https://bud.js.org/reference/bud.setUrl}
-   * @see {@link https://bud.js.org/reference/bud.setProxyUrl}
-   * @see {@link https://bud.js.org/reference/bud.watch}
-   */
-  app
+bud
     .setUrl('http://localhost:3000')
-    .setProxyUrl('http://example.test')
-    .watch(['resources/views', 'app']);
+    .setProxyUrl('https://sage-starter.ddev.site')
+    .watch(['resources/views', 'app', 'blocks']);
 
-  /**
-   * Generate WordPress `theme.json`
-   *
-   * @note This overwrites `theme.json` on every build.
-   *
-   * @see {@link https://bud.js.org/extensions/sage/theme.json}
-   * @see {@link https://developer.wordpress.org/block-editor/how-to-guides/themes/theme-json}
-   */
-  app.wpjson
-    .setSettings({
-      background: {
-        backgroundImage: true,
-      },
-      color: {
-        custom: false,
-        customDuotone: false,
-        customGradient: false,
-        defaultDuotone: false,
-        defaultGradients: false,
-        defaultPalette: false,
-        duotone: [],
-      },
-      custom: {
-        spacing: {},
-        typography: {
-          'font-size': {},
-          'line-height': {},
-        },
-      },
-      spacing: {
-        padding: true,
-        units: ['px', '%', 'em', 'rem', 'vw', 'vh'],
-      },
-      typography: {
-        customFontSize: false,
-      },
-    })
+/**
+ * Configuration which runs multiple instances of bud.
+ *
+ * Each can be uniquely configured.
+ * ```
+ */
+await Promise.all([
+    /**
+     * Make `theme` workspace in `./theme` and setup entrypoints
+     * Files will be output to `./public`
+     */
+    bud.make({
+            label: 'theme',
+            basedir: bud.path('.'),
+            dependsOn: []
+        }, async theme =>
+            theme
+                .setPublicPath( '/wp-content/themes/sage/public')
+                .alias('@blocks', bud.path('resources/blocks'))
+                .entry('editor', ['@scripts/editor', '@styles/editor'])
+                .entry('app', ['@scripts/app', '@styles/app'])
+                .assets(['images'])
+    ),
+])
+
+
+/**
+ * Generate WordPress `theme.json`
+ *
+ * @note This overwrites `theme.json` on every build.
+ *
+ * @see {@link https://bud.js.org/extensions/sage/theme.json}
+ * @see {@link https://developer.wordpress.org/block-editor/how-to-guides/themes/theme-json}
+ */
+bud.wpjson
+    .set('settings.color.custom', false)
+    .set('settings.color.customDuotone', false)
+    .set('settings.color.customGradient', false)
+    .set('settings.color.defaultDuotone', false)
+    .set('settings.color.defaultGradients', false)
+    .set('settings.color.defaultPalette', false)
+    .set('settings.color.duotone', [])
+    .set('settings.custom.spacing', {})
+    .set('settings.custom.typography.font-size', {})
+    .set('settings.custom.typography.line-height', {})
+    .set('settings.spacing.padding', true)
+    .set('settings.spacing.units', ['px', '%', 'em', 'rem', 'vw', 'vh'])
+    .set('settings.typography.customFontSize', false)
     .useTailwindColors()
     .useTailwindFontFamily()
-    .useTailwindFontSize();
-};
+    .useTailwindFontSize()
+    .enable();

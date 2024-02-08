@@ -15,14 +15,4 @@ class ThemeServiceProvider extends SageServiceProvider
     {
         parent::register();
     }
-
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        parent::boot();
-    }
 }

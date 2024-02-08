@@ -122,3 +122,40 @@ add_action('widgets_init', function () {
         'id' => 'sidebar-footer',
     ] + $config);
 });
+
+
+
+/**
+* Register the theme options page.
+ *
+ * @return void
+    */
+add_action('init', function () {
+
+    if (!function_exists('acf_add_options_page')) {
+        return;
+    }
+
+    $parent = acf_add_options_page([
+        'page_title'    => 'Theme Settings',
+        'menu_title'    => 'Theme Options',
+        'menu_slug'     => 'theme-settings',
+        'capability'    => 'edit_posts',
+        'position'      => 100,
+        'icon_url'      => 'dashicons-admin-customizer'
+    ]);
+
+
+
+});
+
+
+/**
+ * Enables SVG Upload
+ */
+add_action('init', function () {
+    add_filter('upload_mimes', function ($mimes) {
+        $mimes['svg'] = 'image/svg+xml';
+        return $mimes;
+    });
+});

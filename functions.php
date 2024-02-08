@@ -11,6 +11,8 @@
 |
 */
 
+define('WP_AUTOLOAD_BLOCK_TYPES', false);
+
 if (! file_exists($composer = __DIR__.'/vendor/autoload.php')) {
     wp_die(__('Error locating autoloader. Please run <code>composer install</code>.', 'sage'));
 }
@@ -28,6 +30,9 @@ require $composer;
 | the IoC container for the system binding all of the various parts.
 |
 */
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->safeLoad();
 
 if (! function_exists('\Roots\bootloader')) {
     wp_die(
@@ -63,3 +68,83 @@ collect(['setup', 'filters'])
             );
         }
     });
+
+
+
+// Set Excerpt word count
+add_filter( 'excerpt_length', function(){
+    return 15;
+}, 999 );
+
+
+
+
+function cz_generate_excerpt($text, $query, $length) {
+
+    $words = explode(' ', $text);
+    $total_words = count($words);
+    $i =null;
+    if ($total_words > $length) {
+
+        $queryLow = array_map('strtolower', $query);
+        $wordsLow = array_map('strtolower', $words);
+
+        for ($i=0; $i <= $total_words; $i++) {
+
+            foreach ($queryLow as $queryItem) {
+                if (is_numeric($i) && isset($wordsLow[$i])) {
+                    if (preg_match("/\b$queryItem\b/", $wordsLow[$i])) {
+                        $posFound = $i;
+                        break;
+                    }
+                }
+            }
+
+            if (isset($posFound)) {
+                break;
+            }
+        }
+
+        if ($i > ($length+($length/2))) {
+            $i = $i - ($length/2);
+        } else {
+            $i = 0;
+        }
+
+    }
+
+    $cutword = array_splice($words,$i,$length);
+    $excerpt = implode(' ', $cutword);
+
+    $keys = implode('|', $query);
+    $excerpt = preg_replace('/(' . $keys .')/iu', '<strong class="search-markup">\0</strong>', $excerpt);
+    $excerptRet = '<p>';
+    if ($i !== 0) {
+        $excerptRet .= '... ';
+    }
+    $excerptRet .= $excerpt . ' ...</p>';
+
+    return $excerptRet;
+
+}
+
+// Highlight search keyword
+function cz_search_excerpt_highlight() {
+
+    # Length in word count
+    $excerptLength = 32;
+
+    $text = strip_shortcodes(wp_strip_all_tags( get_the_content()) );
+
+    # Filter double quotes from query. They will
+    # work on the results side but won't help with
+    # text highlighting and displaying.
+    $query=get_search_query(false);
+    $query=str_replace('"','',$query);
+    $query=esc_html($query);
+
+    $query = explode(' ', $query);
+
+    echo cz_generate_excerpt($text, $query, $excerptLength);
+
+}
