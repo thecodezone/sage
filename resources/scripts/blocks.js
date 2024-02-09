@@ -13,6 +13,12 @@ export default function() {
         block(el);
     });
 
+    //cz full-width
+    onBlock('cz/full-width', async (el) => {
+        import("@blocks/full-width/full-width.scss");
+        const {block} = await import("@blocks/full-width/full-width.js");
+        block(el);
+    });
 }
 
 /**
