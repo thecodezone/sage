@@ -25,7 +25,7 @@ The new version of the theme is located at TBD. It deploys from the `staging` br
 1. Create a directory for your WordPress install
 2. Run `wp core download` in your WordPress root directory
 3. Clone this repository into the `your-wp-root-directory/wp-content/themes/lifbook-site` directory
-4. Copy the `.ddev-config` folder from your theme directory as `.ddev` in your WordPress root directory. <br /> `cp -r lifebook-site/.ddev-config ../../.ddev`
+4. Copy the `.ddev-config` folder from your theme directory as `.ddev` in your WordPress root directory. <br /> `cp -r {{SITE-NAME}}/.ddev-config ../../.ddev`
 5. Run `ddev start`in your WordPress root directory
 6. Run `composer install` from your theme directory
 7. Run `yarn` from your theme directory to set up node modules
@@ -44,11 +44,11 @@ The new version of the theme is located at TBD. It deploys from the `staging` br
 
 ```
 @development:
-ssh: docker:www-data@ddev-lifebook-site-web/var/www/html
+ssh: docker:www-data@ddev-{{SITE-NAME}}-web/var/www/html
 port: 22
-host: ddev-lifebook-site-web
+host: ddev-{{SITE-NAME}}-web
 path: /var/www/html
-url: https://lifebook-site.ddev.site
+url: https://{{SITE-NAME}}.ddev.site
 username: www-data
 ```
 
