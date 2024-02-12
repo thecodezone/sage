@@ -1,38 +1,58 @@
-<p align="center">
-  <a href="https://roots.io/sage/">
-    <img alt="Sage" src="https://cdn.roots.io/app/uploads/logo-sage.svg" height="100">
-  </a>
-</p>
+Codezone/Sage WordPress theme
+======================
 
-<p align="center">
-  <a href="https://packagist.org/packages/roots/sage">
-    <img alt="Packagist Installs" src="https://img.shields.io/packagist/dt/roots/sage?label=projects%20created&colorB=2b3072&colorA=525ddc&style=flat-square">
-  </a>
+## Deployments
 
-  <a href="https://github.com/roots/sage/actions/workflows/main.yml">
-    <img alt="Build Status" src="https://img.shields.io/github/actions/workflow/status/roots/sage/main.yml?branch=main&logo=github&label=CI&style=flat-square">
-  </a>
 
-  <a href="https://twitter.com/rootswp">
-    <img alt="Follow Roots" src="https://img.shields.io/badge/follow%20@rootswp-1da1f2?logo=twitter&logoColor=ffffff&message=&style=flat-square">
-  </a>
-</p>
+Code deployment is managed with GitHub actions.
 
-<p align="center">Advanced WordPress starter theme with Tailwind CSS and Laravel Blade</p>
+### Production
+The current version of the theme is located at TBD. It deploys from the `main` branch.
 
-<p align="center">
-  <a href="https://roots.io/sage/">Website</a> &nbsp;&nbsp; <a href="https://roots.io/sage/docs/installation/">Documentation</a> &nbsp;&nbsp; <a href="https://github.com/roots/sage/releases">Releases</a> &nbsp;&nbsp; <a href="https://discourse.roots.io/">Community</a>
-</p>
+### Staging
+The new version of the theme is located at TBD. It deploys from the `staging` branch.
 
-## Sponsors
+## Development
 
-Sage is an open source project and completely free to use. If you've benefited from our projects and would like to support our future endeavors, please consider [sponsoring Roots](https://github.com/sponsors/roots).
+### Requirements
+- Docker
+- [DDEV](https://ddev.com/)
+- Access to repo on GitHub
 
-<div align="center">
-<a href="https://k-m.com/"><img src="https://cdn.roots.io/app/uploads/km-digital.svg" alt="KM Digital" width="120" height="90"></a> <a href="https://carrot.com/"><img src="https://cdn.roots.io/app/uploads/carrot.svg" alt="Carrot" width="120" height="90"></a> <a href="https://wordpress.com/"><img src="https://cdn.roots.io/app/uploads/wordpress.svg" alt="WordPress.com" width="120" height="90"></a> <a href="https://worksitesafety.ca/careers/"><img src="https://cdn.roots.io/app/uploads/worksite-safety.svg" alt="Worksite Safety" width="120" height="90"></a> <a href="https://www.copiadigital.com/"><img src="https://cdn.roots.io/app/uploads/copia-digital.svg" alt="Copia Digital" width="120" height="90"></a> <a href="https://www.freave.com/"><img src="https://cdn.roots.io/app/uploads/freave.svg" alt="Freave" width="120" height="90"></a> <a href="https://40q.agency/"><img src="https://cdn.roots.io/app/uploads/40q.svg" alt="40Q" width="120" height="90"></a>
-</div>
+### Setup
 
-## Overview
+
+1. Create a directory for your WordPress install
+2. Run `wp core download` in your WordPress root directory
+3. Clone this repository into the `your-wp-root-directory/wp-content/themes/lifbook-site` directory
+4. Copy the `.ddev-config` folder from your theme directory as `.ddev` in your WordPress root directory. <br /> `cp -r lifebook-site/.ddev-config ../../.ddev`
+5. Run `ddev start`in your WordPress root directory
+6. Run `composer install` from your theme directory
+7. Run `yarn` from your theme directory to set up node modules
+8. Run `yarn build` from your theme directory for the first time to compile assets
+9. To sync database from production you can use the codezone/wp-scripts package.
+10. Run `git clone git@github.com:thecodezone/wp-scripts.git scripts` in your WordPress root directory
+11. Run `scripts/setup` in your WordPress root directory to configure your WordPress CLI or manually add configurations to `wp-cli.yml` (copy from `scripts/wp-cli.yml.example` to `wp-cli.yml` in project root). Production and staging environment information is on MyKinsta, or ask a developer. See below for development environment info using ddev.
+12. Run `scripts/sync production development` in your WordPress root directory to download the production database, media files and plugins
+
+### Build commands
+
+* `yarn dev` — Compile assets when file changes are made
+* `yarn build` — Compile assets for production
+
+### Development environment with ddev and wp-scripts
+
+```
+@development:
+ssh: docker:www-data@ddev-lifebook-site-web/var/www/html
+port: 22
+host: ddev-lifebook-site-web
+path: /var/www/html
+url: https://lifebook-site.ddev.site
+username: www-data
+```
+
+### This theme is built with Sage 10
 
 Sage is a WordPress starter theme with block editor support.
 
@@ -40,20 +60,8 @@ Sage is a WordPress starter theme with block editor support.
 - Clean, efficient theme templating utilizing [Laravel Blade](https://laravel.com/docs/master/blade)
 - Modern frontend development workflow powered by [Bud](https://bud.js.org/)
 - Out of the box support for [Tailwind CSS](https://tailwindcss.com/)
-
-## Getting Started
-
-See the [Sage installation documentation](https://roots.io/sage/docs/installation/).
-
-## Stay Connected
-
-- Join us on Discord by [sponsoring us on GitHub](https://github.com/sponsors/roots)
-- Participate on [Roots Discourse](https://discourse.roots.io/)
-- Follow [@rootswp on Twitter](https://twitter.com/rootswp)
-- Read the [Roots Blog](https://roots.io/blog/)
-- Subscribe to the [Roots Newsletter](https://roots.io/newsletter/)
-
-## This is a fork of the original Sage theme to be used as a starter theme for CodeZone.
+- 
+## Original code is a fork of the Sage theme to be used as a starter theme for CodeZone.
 
 To update fork:
 
