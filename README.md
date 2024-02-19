@@ -25,15 +25,16 @@ The new version of the theme is located at TBD. It deploys from the `staging` br
 1. Create a directory for your WordPress install
 2. Run `wp core download` in your WordPress root directory
 3. Clone this repository into the `your-wp-root-directory/wp-content/themes/lifbook-site` directory
-4. Copy the `.ddev-config` folder from your theme directory as `.ddev` in your WordPress root directory. <br /> `cp -r {{SITE-NAME}}/.ddev-config ../../.ddev`
+4. Copy the `.ddev-config` folder from your theme directory as `.ddev` in your WordPress root directory. <br /> `cp -r hazen-advisory/.ddev-config ../../.ddev`
 5. Run `ddev start`in your WordPress root directory
 6. Run `composer install` from your theme directory
 7. Run `yarn` from your theme directory to set up node modules
 8. Run `yarn build` from your theme directory for the first time to compile assets
-9. To sync database from production you can use the codezone/wp-scripts package.
-10. Run `git clone git@github.com:thecodezone/wp-scripts.git scripts` in your WordPress root directory
-11. Run `scripts/setup` in your WordPress root directory to configure your WordPress CLI or manually add configurations to `wp-cli.yml` (copy from `scripts/wp-cli.yml.example` to `wp-cli.yml` in project root). Production and staging environment information is on MyKinsta, or ask a developer. See below for development environment info using ddev.
-12. Run `scripts/sync production development` in your WordPress root directory to download the production database, media files and plugins
+9. Copy .env.example to .env and update the values as needed
+10. To sync database from production you can use the codezone/wp-scripts package.
+11. Run `git clone git@github.com:thecodezone/wp-scripts.git scripts` in your WordPress root directory
+12. Run `scripts/setup` in your WordPress root directory to configure your WordPress CLI or manually add configurations to `wp-cli.yml` (copy from `scripts/wp-cli.yml.example` to `wp-cli.yml` in project root). Production and staging environment information is on MyKinsta, or ask a developer. See below for development environment info using ddev.
+13. Run `scripts/sync production development` in your WordPress root directory to download the production database, media files and plugins
 
 ### Build commands
 
