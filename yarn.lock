@@ -1797,7 +1797,7 @@
     tslib "2.6.2"
     webpack "5.89.0"
 
-"@roots/bud-sass@6.20.0":
+"@roots/bud-sass@^6.20.0":
   version "6.20.0"
   resolved "https://registry.yarnpkg.com/@roots/bud-sass/-/bud-sass-6.20.0.tgz#b980cdcf3f0f21be76b1186b7acc95d4add45d5c"
   integrity sha512-Q4TFCrcuS/9C7s1cO8Y3tGWno/zlN2yBWTVyjc3yj79QCGQzX2cQNjEmwtaKouBk/66J+XikFs2SBof2r55LEQ==
