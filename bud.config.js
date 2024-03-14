@@ -14,8 +14,8 @@ export default async (app) => {
      * @see {@link https://bud.js.org/reference/bud.assets}
      */
     app
-        .entry('app', ['@scripts/app', '@styles/app'])
         .alias('@blocks', app.path('resources/blocks'))
+        .entry('app', ['@scripts/app', '@styles/app'])
         .entry('editor', ['@scripts/editor', '@styles/editor'])
         .assets(['images']);
 
@@ -24,7 +24,7 @@ export default async (app) => {
      *
      * @see {@link https://bud.js.org/reference/bud.setPublicPath}
      */
-    app.setPublicPath('/app/themes/sage/public/');
+    app.setPublicPath('/wp-content/themes/sage/public/');
 
     /**
      * Development server settings
