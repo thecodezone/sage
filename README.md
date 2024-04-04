@@ -24,8 +24,8 @@ The new version of the theme is located at TBD. It deploys from the `staging` br
 
 1. Create a directory for your WordPress install
 2. Run `wp core download` in your WordPress root directory
-3. Clone this repository into the `your-wp-root-directory/wp-content/themes/lifbook-site` directory
-4. Copy the `.ddev-config` folder from your theme directory as `.ddev` in your WordPress root directory. <br /> `cp -r hazen-advisory/.ddev-config ../../.ddev`
+3. Clone this repository into the `your-wp-root-directory/wp-content/themes/{{SITE-NAME}}` directory
+4. Copy the `.ddev-config` folder from your theme directory as `.ddev` in your WordPress root directory. <br /> `cp -r {{SITE-NAME}}/.ddev-config ../../.ddev`
 5. Run `ddev start`in your WordPress root directory
 6. Run `composer install` from your theme directory
 7. Run `yarn` from your theme directory to set up node modules
