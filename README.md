@@ -28,7 +28,7 @@ The new version of the theme is located at TBD. It deploys from the `staging` br
 4. Copy the `.ddev-config` folder from your theme directory as `.ddev` in your WordPress root directory. <br /> `cp -r {{SITE-NAME}}/.ddev-config ../../.ddev`
 5. Run `ddev start`in your WordPress root directory
 6. Run `composer install` from your theme directory
-7. Run `yarn` from your theme directory to set up node modules
+7. Run `yarn` from your theme directory to set up node modules. Make sure to use node 20
 8. Run `yarn build` from your theme directory for the first time to compile assets
 9. Copy .env.example to .env and update the values as needed
 10. To sync database from production you can use the codezone/wp-scripts package.
